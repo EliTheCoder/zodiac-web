@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<body>
+  <input type="text" id="data" placeholder="data" />
+  <input type="text" id="index" placeholder="index" />
+  <input type="text" id="initnonce" placeholder="initial nonce" />
+  <button id="minebutton">mine</button>
+  <p id="output">output</p>
+  <script type="text/javascript" src="bower_components/crypto-js/crypto-js.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script>
+    let nonce;
+    $("#minebutton").click(mine);
+
+    function mine() {
+      let initialNonce = $("#initnonce").val();
+      if (initialNonce) {
+        nonce = parseInt(initialNonce);
+      } else {
+        nonce = 0;
+      }
+      let solved = false;
+      let hash;
+      setInterval(() => {
+        if (!solved) {
+          let hashAttempt = CryptoJS.SHA256($("#data").val() + nonce).toString();
+          if (nonce % 10 === 0) {
+            $("#output").html(`[zodiac block ${$("#index").val()}] mine attempt ${nonce}: ${hashAttempt.substring(0,7)}`);
+          }
+          if (hashAttempt.startsWith("0000000")) {
+            solved = true;
+            hash = hashAttempt;
+            $("#output").html(`[zodiac block ${$("#index").val()}] mine attempt ${nonce}: ${hashAttempt.substring(0,7)}`);
+          } else {
+            nonce++;
+          }
+        }
+      }, 1);
+      return {
+        hash: hash,
+        nonce: nonce
+      };
+    }
+  </script>
+</body>
