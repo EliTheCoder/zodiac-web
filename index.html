@@ -5,7 +5,7 @@
   <input type="text" id="data" placeholder="data" />
   <input type="text" id="initnonce" placeholder="initial nonce" />
   <button id="minebutton">mine</button>
-  <p id="output">output</p>
+  <p id="output" style="font-family: Menlo, Consolas, Cousine">output</p>
   <script type="text/javascript" src="bower_components/crypto-js/crypto-js.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script>
@@ -30,7 +30,7 @@
           if (hashAttempt.startsWith("0000000")) {
             solved = true;
             hash = hashAttempt;
-            $("#output").html(`[zodiac block ${$("#index").val()}] mine attempt ${nonce}: ${hashAttempt.substring(0,7)}`);
+            $("#output").html(`[zodiac block ${$("#data").val().substring(0,1)}] mined! nonce: ${nonce} hash: ${hashAttempt}`);
           } else {
             nonce++;
           }
