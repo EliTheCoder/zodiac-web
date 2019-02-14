@@ -30,7 +30,7 @@
           if (hashAttempt.startsWith("0000000")) {
             solved = true;
             hash = hashAttempt;
-            $("#output").html(`[zodiac block ${$("#index").val()}] mined! nonce: ${nonce} hash: ${hashAttempt}`);
+            $("#output").html(`[zodiac block ${$("#data").val().substring(0,1)}] mined! nonce: ${nonce} hash: ${hashAttempt}`);
           } else {
             nonce++;
           }
